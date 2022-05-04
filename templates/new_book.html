@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{%block content %}
+<center>
+<h1 style="color:white;">Add Book</h1>
+{%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {%- endfor %}
+
+    <form action="{{ request.path }}" method="post">
+        <label style="color:white;" for="name">Name</label><br>
+        <input type="text" name="name" placeholder="Name" /><br>
+        <label style="color:white;" for="author">Author</label><br>
+        <input type="text" name="author" placeholder="author" /><br>
+        <label style="color:white;" for="year">Year</label><br>
+        <textarea name="year" placeholder="year"></textarea><br>
+        <label style="color:white;" for="type">Choose a Type:</label>
+        <select id="type" name="type">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+        <br>
+        <input type="submit" value="Submit" class="btn btn-success" />
+    </form>
+</center>
+
+    {% endblock %}

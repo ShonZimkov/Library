@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{%block content %}
+<center>
+<h1 style="color:white;">Delete Book</h1>
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {%- endfor %}
+
+    <form action="{{ request.path }}" method="post">
+        <label style="color:white;" for="name">Book Name</label><br>
+        <input type="text" name="name" placeholder="name" />
+        <br>
+        <br>
+        <input class="btn btn-danger" type="submit" value="Submit" />
+    </form>
+    {%with messages = get_flashed_messages()%}
+    {%if messages%}
+    {%for msg in messages%}
+    <p>
+    <h2 style="color:white;">{{msg}}</h2>
+    </p>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+</center>
+    {% endblock %}

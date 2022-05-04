@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+<body>
+    {%block content %}
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {%- endfor %}    <center><div class="row row-cols-1 row-cols-md-4 g-4">
+        {{msg}} {% for customer in show_customers %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static',filename='profile.jpg') }}" class="card-img-top" alt="..." width="200" height="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">{{ customer.name }}</h5>
+                    <p class="card-text">ID: {{ customer.id}} </p>
+                    <p class="card-text">City: {{ customer.city}} </p>
+                    <p class="card-text">Age: {{ customer.age }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div></center>
+
+    {% endblock %}
+
+    <body>
+        <hr />
+        {%- for message in get_flashed_messages() %}
+        {{ message }}
+        {%- endfor %}
+
+        <h3>Customers (<a href="{{ url_for('new_customer') }}">Add Customer
+            </a>)</h3>
+        <h3>Books (<a href="{{ url_for('delete_customer') }}">Delete Customer
+            </a>)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.city }}</td>
+                    <td>{{ customer.age }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </body>
+
+    </html>

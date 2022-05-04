@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+    {%block content %}
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {%- endfor %}
+    <center><div class="row row-cols-1 row-cols-md-4 g-4">
+        {{msg}}
+        {% for book,loan,customer in results %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Loan ID: {{loan.id}} ,Customer: {{ customer.name}}</h5>
+                    <p class="card-text">Book Name: {{book.name}} ,Book ID: {{ book.id}}</p>
+                    <p class="card-text"> Loan Date: {{ loan.loan_date }} </p>
+                    <p class="card-text"> Return Date Until: {{ loan.return_date }}</p>
+                    <p class="card-text"> Status: {{ loan.status }}</p> 
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div></center>
+    {% endblock %}

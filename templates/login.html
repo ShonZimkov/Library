@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block background %}
+<style>
+  body {
+      background-image: url('/static/door.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+  }
+</style>
+{% endblock %}
+{% block nav %}
+<!-- nav start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('home') }}">Library Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+      aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Account
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('signup') }}">Sign up</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- nav end -->
+{% endblock %}
+{% block content %}
+<center>
+  {%with messages = get_flashed_messages()%}
+  {%if messages%}
+  {%for msg in messages%}
+  <p>
+  <h2 style="color:white;">{{msg}}</h2>
+  </p>
+  {%endfor%}
+  {%endif%}
+  {%endwith%}
+</center>
+<div class="container">
+
+  <form class="form-signin" method="POST" action="/login">
+    <h2 style="color:white" class="form-signin-heading">Please sign in</h2>
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.username) }}
+    {{ wtf.form_field(form.password) }}
+    {{ wtf.form_field(form.remember) }}
+    <button class="btn btn-lg btn-primary btn-light" type="submit">Sign in</button>
+  </form>
+
+</div> <!-- /container -->
+  <br>
+  <center>
+    <a class="btn btn-lg btn-primary btn-light" href="{{ url_for('signup') }}">Need to sign up?</a>
+  </center>
+</div> <!-- /container -->
+
+{% endblock %}

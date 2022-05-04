@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+<body>
+    {%block content %}
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {%- endfor %}    <center><div class="row row-cols-1 row-cols-md-4 g-4">
+        {{msg}} {% for book in show_books %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static',filename='book.jpg') }}" class="card-img-top" alt="..." width="200" height="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.name }}</h5>
+                    <p class="card-text">ID: {{ book.id}} </p>
+                    <p class="card-text">Author: {{ book.author}} </p>
+                    <p class="card-text">Year Published: {{ book.year }} </p>
+                    <p class="card-text">Type: {{ book.type }}</p>
+                    <a class="btn btn-success" href="{{ url_for('new_loan') }}">Loan</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div></center>
+
+    {% endblock %}
+    <hr />
+    {%- for message in get_flashed_messages() %}
+    {{ message }}
+    {%- endfor %}
+
+    <h3>Books (<a href="{{ url_for('new_book') }}">Add Book
+        </a>)</h3>
+    <h3>Books (<a href="{{ url_for('delete_book') }}">Delete Book
+        </a>)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.year }}</td>
+                <td>{{ book.type }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

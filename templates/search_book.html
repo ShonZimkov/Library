@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+<body>
+    {%block content %}
+    <center>
+        <h1 style="color:white;">Search Book</h1>
+    <form action="{{ request.path }}" method="post">
+        <label style="color:white;" for="name">Name</label><br>
+        <input type="text" name="name" placeholder="Name" /><br>
+        <input type="submit" value="Submit" class="btn btn-success" href="{{ url_for('search_book') }}" />
+    </form>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {{msg}} {% for book in res %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static',filename='book.jpg') }}" class="card-img-top" alt="..." width="200" height="300"/>
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.name }}</h5>
+                    <p class="card-text">ID: {{ book.id}} </p>
+                    <p class="card-text">Author: {{ book.author}} </p>
+                    <p class="card-text">Year Published: {{ book.year }} </p>
+                    <p class="card-text">Type: {{ book.type }}</p>
+                    <a class="btn btn-success" href="{{ url_for('new_loan') }}">Loan</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {%with messages = get_flashed_messages()%}
+    {%if messages%}
+    {%for msg in messages%}
+    <p>
+    <h2 style="color:white;">{{msg}}</h2>
+    </p>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+</center>
+
+    {% endblock %}

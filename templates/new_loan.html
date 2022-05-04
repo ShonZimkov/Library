@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+
+    {%block content %}
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {%- endfor %}
+
+        <center>
+            <h1 style="color:white;">Loan Book</h1>
+        <form action="{{ request.path }}" method="post">
+            <label style="color:white;" for="book_id">book_id</label><br>
+            <input type="text" name="book_id" placeholder="book_id" /><br>
+            <label style="color:white;" for="cust_id">cust_id</label><br>
+            <input type="text" name="cust_id" placeholder="cust_id" /><br>
+            <input type="submit" value="Submit" class="btn btn-success" href="{{ url_for('show_loans') }}" />
+        </form>
+        
+    </center>
+    
+        {% endblock %}
